@@ -7,11 +7,17 @@ use Illuminate\Support\Facades\Auth;
 
 class UserServiceImpl implements UserService
 {
+    private array $users = [
+        "aji" => "rahasia"
+    ];
+    
     public function login(string $email, string $password): bool
     {
-        return Auth::attempt([
-            'email' => $email,
-            'password' => $password
-        ]);
+       if (!isset($this->users[$email])) {
+            return false;
+       }
+
+       $correctPassword = $this->users[$email];
+       return $password == $correctPassword;
     }
 }
