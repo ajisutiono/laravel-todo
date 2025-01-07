@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    private UserService $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function login()
     {
         return view('auth.login', [
@@ -13,8 +21,29 @@ class UserController extends Controller
         ]);
     }
 
-    public function doLogin()
+    public function doLogin(Request $request)
     {
+        // data user
+        $email =  $request->input('email');
+        $password = $request->input('password');
+
+        //validasi
+        if (empty($email) || empty($password)) {
+            return view('auth.login', [
+                'title' => 'Login',
+                'message' => 'email or password cannot be empty'
+            ]);
+        }
+
+        if ($this->userService->login($email, $password)) {
+            $request->session()->put("email", $email);
+            return redirect('/');
+        }
+
+        return view('auth.login', [
+            'title' => 'Login',
+            'message' => 'email or password is wrong'
+        ]);
 
     }
 
