@@ -5,15 +5,16 @@
         <div class="row justify-content-center">
 
             <div class="col-md-8">
-                <form action="#" method="POST">
+                <form action="/todo" method="POST">
                     @csrf
                     <div class="card-body">
                         <div class="row mb-3">
                             {{-- <label for="name" class="col-md-4 col-form-label">Add Todo</label> --}}
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" placeholder="Name">
-                                
+                                <input id="todo" type="text" class="form-control" name="todo"
+                                    placeholder="Add Todo in here">
+
                             </div>
                             <div class="col-md-6">
                                 <button class="btn btn-primary">Add Todo</button>
@@ -31,11 +32,6 @@
                     </div>
 
                     <div class="card-body">
-                        @if (session()->has('message'))
-                            <div class="alert alert-success">
-                                {{ session('message') }}
-                            </div>
-                        @endif
 
                         <table class="table">
                             <thead class="thead-dark">
@@ -49,9 +45,13 @@
                                 @foreach ($todos as $todo)
                                     <tr>
                                         <th scope="row">{{ $todo['id'] }}</th>
-                                        <td>{{ $todo['name'] }}</td>
+                                        <td>{{ $todo['todo'] }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-danger">Remove</button>
+                                            <form action="/todo/{{ $todo['id'] }}/delete" method="POST">
+                                                @csrf
+                                                <button class="btn btn-sm btn-danger" type="submit">Remove</button>
+                                            </form>
+
 
                                         </td>
                                     </tr>

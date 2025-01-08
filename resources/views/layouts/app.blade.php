@@ -20,19 +20,18 @@
                     {{ $title }}
                 @endif
             </a>
-            
+
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
-                    
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     @guest
-                       
                     @else
                         <li class="nav-item">
                             <form id="logout" action="/logout" method="POST">
@@ -49,6 +48,13 @@
     </nav>
 
     <div class="container">
+        @if (isset($error))
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    {{ $error }}
+                </div>
+            </div>
+        @endif
         <main class="py-4">
             @yield('content')
         </main>

@@ -7,11 +7,11 @@ use App\Services\TodoService;
 
 class TodoServiceImpl implements TodoService
 {
-    public function saveTodo($id, $name): void
+    public function saveTodo($id, $todo): void
     {
         $todo = new Todo([
             "id" => $id,
-            "name" => $name
+            "todo" => $todo
         ]);
         $todo->save();
     }

@@ -2,13 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        @if (isset($error))
-            <div class="row">
-                <div class="alert alert-danger" role="alert">
-                    {{ $error }}
-                </div>
-            </div>
-        @endif
+     
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
