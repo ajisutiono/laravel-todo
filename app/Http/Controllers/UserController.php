@@ -31,7 +31,7 @@ class UserController extends Controller
         if (empty($email) || empty($password)) {
             return view('auth.login', [
                 'title' => 'Login',
-                'message' => 'email or password cannot be empty'
+                'error' => 'email or password is required'
             ]);
         }
 
@@ -42,7 +42,7 @@ class UserController extends Controller
 
         return view('auth.login', [
             'title' => 'Login',
-            'message' => 'email or password is wrong'
+            'error' => 'email or password is wrong'
         ]);
 
     }

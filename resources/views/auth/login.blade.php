@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="row justify-content-center">
+        @if (isset($error))
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    {{ $error }}
+                </div>
+            </div>
+        @endif
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
@@ -12,8 +19,8 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email"
-                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                    required autocomplete="email" autofocus>
+                                    class="form-control @error('email') is-invalid @enderror" name="email" required
+                                    autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
