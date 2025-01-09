@@ -31,7 +31,7 @@ class UserControllerTest extends TestCase
 
     public function testLoginSuccess()
     {
-        $this->seed([DatabaseSeeder::class]);
+        $this->seed(DatabaseSeeder::class);
 
         $this->post('/login', [
             "email" => "admin@mail.com",
@@ -66,6 +66,16 @@ class UserControllerTest extends TestCase
 
     public function testLogout()
     {
-        
+        $this->withSession([
+            "email" => "admin@mail.com"
+        ])->post('/logout')
+            ->assertRedirect('/')
+            ->assertSessionMissing('email');
+    }
+
+    public function testLogoutGuest()
+    {
+        $this->post('/logout')
+            ->assertRedirect('/');
     }
 }

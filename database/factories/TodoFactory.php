@@ -18,8 +18,7 @@ class TodoFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->unique()->randomDigit(),
-            'todo' => fake()->name()
+            
         ];
     }
 }

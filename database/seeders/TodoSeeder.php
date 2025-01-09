@@ -13,6 +13,15 @@ class TodoSeeder extends Seeder
      */
     public function run(): void
     {
-        Todo::factory(2)->create();
+        Todo::query()->insert([
+            [
+                "id" => "1",
+                "todo" => "Todo 1"
+            ],
+            [
+                "id" => "2",
+                "todo" => "Todo 2"
+            ]
+        ]);
     }
 }
